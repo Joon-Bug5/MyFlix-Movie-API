@@ -1,7 +1,10 @@
-const express = require('express');
-  morgan = require('morgan');
+const express = require('express'),
+morgan = require('morgan'),
+bodyParser = require('body-parser'),
+uuid = require('uuid');
 
 const app = express();
+app.use(bodyParser.json());
 
 let topMarvelMovies = [
   {
@@ -69,6 +72,38 @@ app.get('/documentation', (req, res) => {
 // get movies json
 app.get('/movies', (req, res) => {
   res.json(topMarvelMovies);
+});
+// get movies by title
+app.get('/movies/:title', (req, res) => {
+  res.send('Sucessful Get Response, returning JSON data about single movie by title');
+});
+// get genre by title
+app.get('/movies/title/:genre', (req, res) => {
+  res.send('Sucessful Get Response, returning genre description by title');
+});
+// get director by name
+app.get('/movies/director/:name', (req, res) => {
+  res.send('Sucessful Get Response, returning director by name');
+});
+// Allow new users to register.
+app.post('/newUser', (req, res) => {
+  res.send('Sucessful Post Response, allowing new users to register');
+});
+// Allow users to update their user info (username)
+app.put('/newUser/:username', (req, res) => {
+  res.send('Sucessful Put Response, allowing username to update');
+});
+// Allow users to add movie to their list of favorites
+app.post('/newUser/username/:favorites', (req, res) => {
+  res.send('Sucessful Post Response, allowing user to add movie to favorites');
+});
+// Allow users to delete movie from their list of favorites
+app.delete('/newUser/username/:favorites', (req, res) => {
+  res.send('Sucessful Delete response, allowing user to delete movies from favorites');
+});
+// Allow users to deregister
+app.delete('/newUser', (req, res) => {
+  res.send('Sucessful Delete response, allowing user to deregister');
 });
 // log all application error to terminal
 app.use((err, req, res, next) => {

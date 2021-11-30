@@ -4,14 +4,137 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Movies API</title>
+  <style>
+  td {
+    padding: 3px;
+    border: 1px solid #090903;
+  }
+  </style>
 </head>
+
 <body>
   <h1>Objective</h1>
-  <div>
-    <p>To build the server-side component of a "movies" web application.<br />
+  <p>To build the server-side component of a "movies" web application.<br />
     The web application will provide users with access to information about different
-  movies, directors, and generes. <br />Users will be able to sign up, update their personal information,
-and create a list of their favorite movies.</p>
-  </div>
-</body>
-</html>
+    movies, directors, and generes. <br />Users will be able to sign up, update their personal information,
+    and create a list of their favorite movies.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Request</th>
+          <th>Url</th>
+          <th>HTTP Method</th>
+          <th>Request body data format</th>
+          <th>Response body data format</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Return a list of ALL movies to the user</td>
+          <td>/movies</td>
+          <td>GET</td>
+          <td>None</td>
+          <td>A JSON object holding data about all the movies</td>
+        </tr>
+
+        <tr>
+          <td>Return data (description, genre, director, image URL, whether it's featured or not) about a signle movie by title to the user</td>
+          <td>/movies/:title</td>
+          <td>GET</td>
+          <td>None</td>
+          <td>A JSON object holding data about a single movie containing title, description, genre, image URL. <br /> Example:
+            {<br />
+              Title: 'Iron Man',<br />
+              Description: 'A man in an iron suit',<br />
+              Genre: 'Action, Superhero, Thriller',<br />
+              Image: 'ImageURL'<br />
+            }
+          </td>
+        </tr>
+
+        <tr>
+          <td>Return data about a genre (description) by name/title (e.g., “Thriller”).</td>
+          <td>/movies/title/:genre</td>
+          <td>GET</td>
+          <td>None</td>
+          <td>Return text message of the genre of movie selected. <br />
+            Example: Iron Man is a Action, Superhero, Thriller, and Adventure movie. About a rich playboy/genius who makes a suit to become a superhero.</td>
+          </tr>
+
+          <tr>
+            <td>Return data about a director (bio, birth year, death year) by name.</td>
+            <td>/movies/director/:name</td>
+            <td>GET</td>
+            <td>None</td>
+            <td>Return information about director selected. <br />
+              Example: Jonathan Kolia Favreau is an American actor, comedian and filmmaker. Born in October 19, 1966 in New York City, U.S.</td>
+            </tr>
+
+            <tr>
+              <td>Allow new users to register.</td>
+              <td>/newUser</td>
+              <td>POST</td>
+              <td>A JSON object holding data about newUser. <br />
+                Example: {<br />
+                  firstName: 'David',<br />
+                  lastName: 'Chung',<br />
+                  userName: 'JoonBug',<br />
+                  password: 'password',<br />
+                  email: 'email@gmail.com'<br />
+                }
+              </td>
+              <td>A JSON object holding data about newUser that was added, including ID. <br />
+                Example: {<br />
+                  firstName: 'David',<br />
+                  lastName: 'Chung',<br />
+                  userName: 'JoonBug',<br />
+                  password: 'password',<br />
+                  email: 'email@gmail.com',<br />
+                  ID: 'abc123'<br />
+                }
+              </td>
+            </tr>
+
+            <tr>
+              <td>Allow users to update their user info (username).</td>
+              <td>/newUser/:username</td>
+              <td>PUT</td>
+              <td>None</td>
+              <td>A text message indicating the user's info was updated.</td>
+            </tr>
+
+            <tr>
+              <td>Allow users to add a movie to their list of favorites.</td>
+              <td>/newUser/username/:favorites</td>
+              <td>POST</td>
+              <td>A JSON object holding data about a single movie containing title, genre, director, release year. <br />
+                Example: {<br />
+                  Title: 'Captain Marvel',<br />
+                  Genre: 'Action, Sci-fi',<br />
+                  Director: 'Anna Boden, Ryan Fleck',<br />
+                  Year: '2019'<br />
+                }
+              </td>
+              <td>A text message indicating user sucessfully added movie to their favorites.</td>
+            </tr>
+
+            <tr>
+              <td>Allow users to remove a movie from their list of favorites.</td>
+              <td>/newUser/username/:favorites</td>
+              <td>DELETE</td>
+              <td>None</td>
+              <td>A text message indicating user sucessfully removed movie from their list of favorites.</td>
+            </tr>
+
+            <tr>
+              <td>Allow existing users to deregister.</td>
+              <td>/newUser</td>
+              <td>DELETE</td>
+              <td>None</td>
+              <td>A text message indicating user sucessfully removed/deleted their account.</td>
+            </tr>
+          </tbody>
+        </table>
+      </body>
+      </html>
