@@ -72,25 +72,41 @@
             </tr>
 
             <tr>
+              <td>Return data of all Users.</td>
+              <td>/users</td>
+              <td>GET</td>
+              <td>None</td>
+              <td>All the list of Users in JSON object.
+                Example: {<br />
+                  Username: 'JoonBug'<br />
+                  Password: 'password',<br />
+                  Email: 'email@gmail.com',<br />
+                  Birthday: '01/01/01',<br />
+                  FavoriteMovies: '[ ]'<br />
+                }
+              </td>
+            </tr>
+
+            <tr>
               <td>Allow new users to register.</td>
               <td>/newUser</td>
               <td>POST</td>
               <td>A JSON object holding data about newUser. <br />
                 Example: {<br />
-                  firstName: 'David',<br />
-                  lastName: 'Chung',<br />
-                  userName: 'JoonBug',<br />
-                  password: 'password',<br />
-                  email: 'email@gmail.com'<br />
+                  Username: 'JoonBug'<br />
+                  Password: 'password',<br />
+                  Email: 'email@gmail.com',<br />
+                  Birthday: '01/01/01',<br />
+                  FavoriteMovies: '[ ]'<br />
                 }
               </td>
               <td>A JSON object holding data about newUser that was added, including ID. <br />
                 Example: {<br />
-                  firstName: 'David',<br />
-                  lastName: 'Chung',<br />
-                  userName: 'JoonBug',<br />
-                  password: 'password',<br />
-                  email: 'email@gmail.com',<br />
+                  Username: 'JoonBug'<br />
+                  Password: 'password',<br />
+                  Email: 'email@gmail.com',<br />
+                  Birthday: '01/01/01',<br />
+                  FavoriteMovies: '[ ]'<br />
                   ID: 'abc123'<br />
                 }
               </td>
