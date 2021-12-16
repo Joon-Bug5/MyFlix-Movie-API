@@ -21,6 +21,9 @@ app.use(morgan('common'));
 app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
+let auth = require('./auth.js')(app);
+const passport = require('passport');
+require('./passport.js');
 // get defaul textual response
 app.get('/', (req, res) => {
   res.send('Welcome to my top 10 Marvel Movies App!');
@@ -30,7 +33,7 @@ app.get('/documentation', (req, res) => {
   res.sendFile('public/documentation.html', { root: __dirname });
 });
 // get movies json
-app.get('/movies', (req, res) => {
+app.get('/movies', passport.authenticate('jwt', { session: false }),  (req, res) => {
   Movies.find()
   .then((movies) => {
     res.status(201).json(movies);
