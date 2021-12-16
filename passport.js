@@ -1,5 +1,5 @@
 const passport = require('passport'),
-  LocalStrategy = require('passport-local').Strategy,
+  LocalStrategy = require('passport-local').Strategy, //Takes a username and password from the request body and Mongoose to check your data
   Models = require('./models.js'),
   passportJWT = require('passport-jwt');
 
@@ -29,8 +29,8 @@ passport.use(new LocalStrategy({
 }));
 
 passport.use(new JWTStrategy({
-  jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
-  secretOrKey: 'your_jwt_secret'
+  jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),// "bearer token"
+  secretOrKey: 'your_jwt_secret' // secret key to verify the signature of the JWT, referenced in auth.js
 }, (jwtPayload, callback) => {
   return Users.findById(jwtPayload._id)
     .then((user) => {
