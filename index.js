@@ -44,7 +44,7 @@ app.get('/movies', passport.authenticate('jwt', { session: false }),  (req, res)
   });
 });
 // get movies by title
-app.get('/movies/:Title', (req, res) => {
+app.get('/movies/:Title', passport.authenticate('jwt', { session: false }),  (req, res) => {
   Movies.findOne({ Title: req.params.Title })
   .then((movie) => {
     res.json(movie);
@@ -55,7 +55,7 @@ app.get('/movies/:Title', (req, res) => {
   });
 });
 // get genre by title
-app.get('/movies/genres/:Name', (req, res) => {
+app.get('/movies/genres/:Name', passport.authenticate('jwt', {session: false}),  (req, res) => {
   Movies.find({ 'Genre.Name' : req.params.Name})
   .then((movie) => {
     res.json(movie);
@@ -66,7 +66,7 @@ app.get('/movies/genres/:Name', (req, res) => {
   });
 });
 // get director by name, ryan cogler, joseph russo, jon watts, 61b1130d03ab8873803f93e1
-app.get('/movies/director/:Name', (req, res) => {
+app.get('/movies/director/:Name', passport.authenticate('jwt', {session: false}),  (req, res) => {
   Movies.findOne({ 'Director.Name' : req.params.Name})
   .then((movie) => {
     res.json(movie);
@@ -77,7 +77,7 @@ app.get('/movies/director/:Name', (req, res) => {
   });
 });
 // Get all Users.
-app.get('/users', (req, res) => {
+app.get('/users', passport.authenticate('jwt', {session: false}), (req, res) => {
   Users.find()
   .then((users) => {
     res.status(201).json(users);
@@ -113,7 +113,7 @@ app.post('/users', (req, res) => {
     });
 });
 // Allow users to update their user info (username)
-app.put('/users/:Username', (req, res) => {
+app.put('/users/:Username', passport.authenticate('jwt', { session: false}),  (req, res) => {
   Users.findOneAndUpdate({ Username: req.params.Username }, {
     $set: {
       Username: req.body.Username,
@@ -133,7 +133,7 @@ app.put('/users/:Username', (req, res) => {
   });
 });
 // Allow users to add movie to their list of favorites
-app.post('/users/:Username/favorites/:movieID', (req, res) => {
+app.post('/users/:Username/favorites/:movieID', passport.authenticate('jwt', { session: false}), (req, res) => {
   Users.findOneAndUpdate({ Username: req.params.Username}, {
     $push: {FavoriteMovies: req.params.movieID}
   },
@@ -148,7 +148,7 @@ app.post('/users/:Username/favorites/:movieID', (req, res) => {
   });
 });
 // Allow users to delete movie from their list of favorites
-app.delete('/users/:Username/favorites/:movieID', (req, res) => {
+app.delete('/users/:Username/favorites/:movieID', passport.authenticate('jwt', { session: false}),  (req, res) => {
   Users.findOneAndUpdate({ Username: req.params.Username}, {
     $pull: {FavoriteMovies: req.params.movieID}
   },
@@ -163,7 +163,7 @@ app.delete('/users/:Username/favorites/:movieID', (req, res) => {
   });
 });
 // Allow users to deregister
-app.delete('/users/:Username', (req, res) => {
+app.delete('/users/:Username', passport.authenticate('jwt', {session: false}), (req, res) => {
   Users.findOneAndRemove({ Username: req.params.Username})
   .then((user) => {
     if (!user) {
