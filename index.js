@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 
 const uuid = require('uuid');
 const app = express();
-const cores = require('cors');
+
 const { check, validationResult } = require('express-validator');
 
 const mongoose = require('mongoose');
@@ -18,14 +18,14 @@ mongoose.connect('process.env.CONNECTION_URI',
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
-
-
+const cors = require('cors');
+app.use(cors());
 // middleware functions
 app.use(morgan('common'));
 app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
-app.use(cors());
+
 let auth = require('./auth.js')(app);
 const passport = require('passport');
 require('./passport.js');
