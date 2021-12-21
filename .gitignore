@@ -1,3 +1,7 @@
 
 .gitattributes
 node_modules
+directors.json
+genres.json
+index.js
+movies.json
