@@ -71,7 +71,7 @@ app.get('/genres/:Name', passport.authenticate('jwt', {session: false}),  (req, 
   });
 });
 // get director by name, ryan cogler, joseph russo, jon watts, 61b1130d03ab8873803f93e1
-app.get('/director/:Name', passport.authenticate('jwt', {session: false}),  (req, res) => {
+app.get('/directors/:Name', passport.authenticate('jwt', {session: false}),  (req, res) => {
   Movies.findOne({ 'Director.Name' : req.params.Name})
   .then((movie) => {
     res.json(movie);
