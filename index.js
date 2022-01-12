@@ -60,7 +60,7 @@ app.get('/movies/:Title', passport.authenticate('jwt', { session: false }),  (re
   });
 });
 // get genre by title
-app.get('/movies/genres/:Name', passport.authenticate('jwt', {session: false}),  (req, res) => {
+app.get('/genres/:Name', passport.authenticate('jwt', {session: false}),  (req, res) => {
   Movies.find({ 'Genre.Name' : req.params.Name})
   .then((movie) => {
     res.json(movie);
@@ -71,7 +71,7 @@ app.get('/movies/genres/:Name', passport.authenticate('jwt', {session: false}), 
   });
 });
 // get director by name, ryan cogler, joseph russo, jon watts, 61b1130d03ab8873803f93e1
-app.get('/movies/director/:Name', passport.authenticate('jwt', {session: false}),  (req, res) => {
+app.get('/director/:Name', passport.authenticate('jwt', {session: false}),  (req, res) => {
   Movies.findOne({ 'Director.Name' : req.params.Name})
   .then((movie) => {
     res.json(movie);
